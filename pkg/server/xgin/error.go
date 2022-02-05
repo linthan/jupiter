@@ -21,12 +21,12 @@ import (
 )
 
 var (
-	errBadRequest         = status.Errorf(codes.InvalidArgument, createStatusErr(codeMSInvalidParam, "bad request"))
-	errMicroDefault       = status.Errorf(codes.Internal, createStatusErr(codeMS, "micro default"))
-	errMicroInvoke        = status.Errorf(codes.Internal, createStatusErr(codeMSInvoke, "invoke failed"))
-	errMicroInvokeLen     = status.Errorf(codes.Internal, createStatusErr(codeMSInvokeLen, "invoke result not 2 item"))
-	errMicroInvokeInvalid = status.Errorf(codes.Internal, createStatusErr(codeMSSecondItemNotError, "second invoke res not a error"))
-	errMicroResInvalid    = status.Errorf(codes.Internal, createStatusErr(codeMSResErr, "response is not valid"))
+	// errBadRequest     = status.Errorf(codes.InvalidArgument, createStatusErr(codeMSInvalidParam, "bad request"))
+	errMicroDefault = status.Errorf(codes.Internal, createStatusErr(codeMS, "micro default"))
+	// errMicroInvoke  = status.Errorf(codes.Internal, createStatusErr(codeMSInvoke, "invoke failed"))
+	// errMicroInvokeLen = status.Errorf(codes.Internal, createStatusErr(codeMSInvokeLen, "invoke result not 2 item"))
+	// errMicroInvokeInvalid = status.Errorf(codes.Internal, createStatusErr(codeMSSecondItemNotError, "second invoke res not a error"))
+	// errMicroResInvalid = status.Errorf(codes.Internal, createStatusErr(codeMSResErr, "response is not valid"))
 )
 
 // HTTPError wraps handler error.

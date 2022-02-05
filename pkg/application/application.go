@@ -56,10 +56,10 @@ const (
 // Application is the framework's instance, it contains the servers, workers, client and configuration settings.
 // Create an instance of Application, by using &Application{}
 type Application struct {
-	cycle        *xcycle.Cycle
-	smu          *sync.RWMutex
-	initOnce     sync.Once
-	startupOnce  sync.Once
+	cycle    *xcycle.Cycle
+	smu      *sync.RWMutex
+	initOnce sync.Once
+	// startupOnce  sync.Once
 	stopOnce     sync.Once
 	servers      []server.Server
 	workers      []worker.Worker
