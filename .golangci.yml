@@ -53,13 +53,7 @@ run:
   allow-parallel-runners: false
 linters:
   disable:
-    - deadcode
-    - structcheck
-    - varcheck
-    - gosimple
     - staticcheck
-    - ineffassign
-    - govet
 linters-settings:  
   errcheck:
       # Report about not checking of errors in type assertions: `a := b.(MyStruct)`.

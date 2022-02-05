@@ -19,7 +19,7 @@ func init() {
 		Gorms map[string]interface{} `json:"gorms"`
 	}
 	var rets = gormStatus{
-		Gorms: make(map[string]interface{}, 0),
+		Gorms: make(map[string]interface{}),
 	}
 	governor.HandleFunc("/debug/gorm/stats", func(w http.ResponseWriter, r *http.Request) {
 		rets.Gorms = Stats()

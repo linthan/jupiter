@@ -364,7 +364,7 @@ func (logger *Logger) DPanicf(template string, args ...interface{}) {
 func (logger *Logger) Fatal(msg string, fields ...Field) {
 	if logger.IsDebugMode() {
 		panicDetail(msg, fields...)
-		msg = normalizeMessage(msg)
+		_ = normalizeMessage(msg)
 		return
 	}
 	logger.desugar.Fatal(msg, fields...)

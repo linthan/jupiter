@@ -39,9 +39,9 @@ func Parallel(fns ...func()) func() {
 	return func() {
 		wg.Add(len(fns))
 		for _, fn := range fns {
-			go func() {
+			go func(fn func()) {
 				_ = try2(fn, wg.Done)
-			}()
+			}(fn)
 		}
 		wg.Wait()
 	}

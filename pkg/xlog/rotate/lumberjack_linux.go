@@ -207,6 +207,8 @@ func (l *Logger) run() {
 				panic(err)
 			}
 			_asyncBufferPool.Put(b)
+		default:
+			time.Sleep(time.Millisecond * 100)
 		}
 	}
 }
@@ -429,9 +431,7 @@ func (l *Logger) millRunOnce() error {
 			// Only count the uncompressed log file or the
 			// compressed log file, not both.
 			fn := f.Name()
-			if strings.HasSuffix(fn, compressSuffix) {
-				fn = fn[:len(fn)-len(compressSuffix)]
-			}
+			fn = strings.TrimSuffix(fn, compressSuffix)
 			preserved[fn] = true
 
 			if len(preserved) > l.MaxBackups {

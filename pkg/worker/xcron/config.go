@@ -136,8 +136,6 @@ func newETCDXcron(config *Config) {
 	if config.TTL == 0 {
 		config.TTL = DefaultTTL
 	}
-
-	return
 }
 
 type wrappedLogger struct {
