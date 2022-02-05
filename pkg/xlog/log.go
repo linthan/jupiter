@@ -155,7 +155,7 @@ func (logger *Logger) AutoLevel(confKey string) {
 		lvText := strings.ToLower(config.GetString(confKey))
 		if lvText != "" {
 			logger.Info("update level", String("level", lvText), String("name", logger.config.Name))
-			logger.lv.UnmarshalText([]byte(lvText))
+			_ = logger.lv.UnmarshalText([]byte(lvText))
 		}
 	})
 }

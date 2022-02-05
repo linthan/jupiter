@@ -131,8 +131,8 @@ func (app *Application) initialize() {
 		//private method
 		app.initHooks(StageBeforeStop, StageAfterStop)
 
-		app.parseFlags()
-		app.printBanner()
+		_ = app.parseFlags()
+		_ = app.printBanner()
 	})
 }
 
@@ -250,7 +250,7 @@ func (app *Application) Run(servers ...server.Server) error {
 	defer app.clean()
 
 	// todo jobs not graceful
-	app.startJobs()
+	_ = app.startJobs()
 
 	// start servers and govern server
 	app.cycle.Run(app.startServers)
@@ -336,9 +336,9 @@ func (app *Application) waitSignals() {
 	signals.Shutdown(func(grace bool) { //when get shutdown signal
 		//todo: support timeout
 		if grace {
-			app.GracefulStop(context.TODO())
+			_ = app.GracefulStop(context.TODO())
 		} else {
-			app.Stop()
+			_ = app.Stop()
 		}
 	})
 }
@@ -367,8 +367,13 @@ func (app *Application) startServers() error {
 	for _, s := range app.servers {
 		s := s
 		eg.Go(func() (err error) {
-			registry.DefaultRegisterer.RegisterService(ctx, s.Info())
-			defer registry.DefaultRegisterer.UnregisterService(ctx, s.Info())
+			_ = registry.DefaultRegisterer.RegisterService(ctx, s.Info())
+			defer func() {
+				if err := recover(); err != nil {
+					return
+				}
+				_ = registry.DefaultRegisterer.UnregisterService(ctx, s.Info())
+			}()
 			app.logger.Info("start server", xlog.FieldMod(ecode.ModApp), xlog.FieldEvent("init"), xlog.FieldName(s.Info().Name), xlog.FieldAddr(s.Info().Label()), xlog.Any("scheme", s.Info().Scheme))
 			defer app.logger.Info("exit server", xlog.FieldMod(ecode.ModApp), xlog.FieldEvent("exit"), xlog.FieldName(s.Info().Name), xlog.FieldErr(err), xlog.FieldAddr(s.Info().Label()))
 			err = s.Serve()
