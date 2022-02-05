@@ -15,7 +15,6 @@
 package xgin
 
 import (
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -58,7 +57,7 @@ var ErrNotFound = HTTPError{
 
 var (
 	// ErrGRPCResponseValid ...
-	ErrGRPCResponseValid = grpc.Errorf(codes.Internal, "response valid")
+	ErrGRPCResponseValid = status.Errorf(codes.Internal, "response valid")
 	// ErrGRPCInvokeLen ...
-	ErrGRPCInvokeLen = grpc.Errorf(codes.Internal, "invoke request without len 2 res")
+	ErrGRPCInvokeLen = status.Errorf(codes.Internal, "invoke request without len 2 res")
 )

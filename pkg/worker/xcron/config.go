@@ -113,9 +113,8 @@ func (config Config) Build() *Cron {
 		config.wrappers = append(config.wrappers, delayIfStillRunning(config.logger))
 	} else if config.ConcurrentDelay < 0 { // 跳过
 		config.wrappers = append(config.wrappers, skipIfStillRunning(config.logger))
-	} else {
-		// 默认不延迟也不跳过
 	}
+	// 默认不延迟也不跳过
 
 	if config.DistributedTask {
 		// 创建 Etcd Lock
